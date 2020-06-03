@@ -4,31 +4,34 @@ export default function Home() {
   return (
     <div className="container">
       <Head>
-        <title>Create Next App</title>
+        <title>JSON to CSV</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
         <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          
+          Free  <span>JSON</span> to <span>CSV</span> converter
+          {/* <a href="https://nextjs.org">Next.js!</a> */}
         </h1>
 
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
+        <h2 className="description">
+          Convert unlimited <span>JSON</span> files<br/><br/>
+          <code>// MAXIMUM FILE SIZE: <span>UNLIMITED</span></code>
+        </h2>
 
         <div className="grid">
           <a href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
+            <h3>Buy me a coffee &rarr;</h3>
+            <p>Donating any amount you help to keep the site online <span>without ads.</span></p>
           </a>
 
           <a href="https://nextjs.org/learn" className="card">
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
+            <h3>See on GitHub &rarr;</h3>
+            <p>Collaborate with the project or just take a look!</p>
           </a>
 
-          <a
+          {/* <a
             href="https://github.com/vercel/next.js/tree/master/examples"
             className="card"
           >
@@ -44,7 +47,7 @@ export default function Home() {
             <p>
               Instantly deploy your Next.js site to a public URL with Vercel.
             </p>
-          </a>
+          </a> */}
         </div>
       </main>
 
@@ -54,8 +57,8 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
+          Developed by &nbsp;<span>Matheus Alexandre de Sena</span>{' '}
+          <img src="/github.svg" alt="Vercel Logo" className="logo" />
         </a>
       </footer>
 
@@ -101,7 +104,10 @@ export default function Home() {
           color: inherit;
           text-decoration: none;
         }
-
+       span {
+          color: #0070f3;
+          font-weight: bold;
+        }
         .title a {
           color: #0070f3;
           text-decoration: none;
@@ -179,7 +185,7 @@ export default function Home() {
         }
 
         .logo {
-          height: 1em;
+          height: 2em;
         }
 
         @media (max-width: 600px) {
