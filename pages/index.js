@@ -1,5 +1,15 @@
 import Head from 'next/head'
 
+let selectedFile
+
+const onFileChange = event => { 
+  selectedFile = event.target.files[0];  
+}; 
+
+const onFileUpload = () => { 
+     console.log(selectedFile)
+}; 
+
 export default function Home() {
   return (
     <div className="container">
@@ -26,10 +36,15 @@ export default function Home() {
             
             <div className="actions">
                 <div className="half-relative">
-                    <button>          <img src="/cloud.svg" alt="Vercel Logo" className="btn-img" /> <br></br>Upload JSON file</button>
+                    <input type="file" onChange={onFileChange} /> 
                 </div>
                 <div className="half-relative">
                     <textarea cols="30" rows="5" placeholder="Paste or JSON data"></textarea>
+                </div>
+            </div>
+            <div className="actions">
+                <div className="full-relative">
+                  <button onClick={ onFileUpload }><img src="/cloud.svg" alt="Vercel Logo" className="btn-img" /> <br></br>Upload JSON file</button>
                 </div>
             </div>
         </div>
@@ -174,11 +189,15 @@ export default function Home() {
           display: flex;
           flex-wrap: wrap;
         }
+        .full-relative {
+          flex: 0 0 100%;
+          max-width: 100%;
+        }
         .half-relative {
           flex: 0 0 50%;
           max-width: 50%
         }
-        .half-relative * {
+        .half-relative *, .full-relative * {
           position: relative;
           transform: translateX(-50%);
           left: 50%;
