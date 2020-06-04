@@ -10,6 +10,11 @@ const onFileUpload = () => {
      console.log(selectedFile)
 }; 
 
+const fakeUpload = () => {
+  const e = document.getElementById('uploadInput')
+  e.click();
+}
+
 export default function Home() {
   return (
     <div className="container">
@@ -36,7 +41,11 @@ export default function Home() {
             
             <div className="actions">
                 <div className="half-relative">
-                    <input type="file" onChange={onFileChange} /> 
+                {/* <button onClick={ onFileUpload }><img src="/cloud.svg" alt="Vercel Logo" className="btn-img" /> <br></br>Upload JSON file</button> */}
+                <button onClick={ fakeUpload }><img src="/cloud.svg" alt="Vercel Logo" className="btn-img" /> <br></br>Upload JSON file</button>
+
+                  {/* <label for="uploadInput"><img src="/cloud.svg" alt="Vercel Logo" className="btn-img" /> <br></br>Upload JSON file</label> */}
+                    <input id="uploadInput" type="file" onChange={onFileChange} /> 
                 </div>
                 <div className="half-relative">
                     <textarea cols="30" rows="5" placeholder="Paste or JSON data"></textarea>
@@ -44,7 +53,6 @@ export default function Home() {
             </div>
             <div className="actions">
                 <div className="full-relative">
-                  <button onClick={ onFileUpload }><img src="/cloud.svg" alt="Vercel Logo" className="btn-img" /> <br></br>Upload JSON file</button>
                 </div>
             </div>
         </div>
@@ -202,18 +210,21 @@ export default function Home() {
           transform: translateX(-50%);
           left: 50%;
         }
-        textarea, button {
+        input {
+          display: none;
+        }
+        textarea, button, label {
           padding: 1rem;
           font-size: 1rem;
         }
-        button .btn-img {
+        button .btn-img, label .btn-img {
           max-height: 3rem;
           position: absolute;
           top: 0.5rem;
           transform: translateX(-50%);
           left: 50%;
         }
-        button {
+        button, label {
           background: #0070f3;
           font-weight: bold;
           color: white;
@@ -222,7 +233,7 @@ export default function Home() {
           height: 100%;
           line-height: 2rem;
         }
-        button:hover {
+        button:hover, label:hover {
           cursor: pointer;
           opacity: 0.75;
           transition: opacity .25s linear;
@@ -230,7 +241,7 @@ export default function Home() {
         button:active, button:focus, button:target {
           outline: none;
         }
-        button:active {
+        button:active, label:active {
           background: #000;
           background-size: 100%;
           transition: background 0s;
