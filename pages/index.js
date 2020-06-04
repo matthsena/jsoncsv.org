@@ -20,6 +20,20 @@ export default function Home() {
           <code>// MAXIMUM FILE SIZE: <span>UNLIMITED</span></code>
         </h2>
 
+        <div className="box">
+            <h3><span>Upload</span> or <span>past</span> your JSON!</h3>
+            <p>Click the button below to upload the file, or paste the text in the input.</p>
+            
+            <div className="actions">
+                <div className="half-relative">
+                    <button>          <img src="/cloud.svg" alt="Vercel Logo" className="btn-img" /> <br></br>Upload JSON file</button>
+                </div>
+                <div className="half-relative">
+                    <textarea cols="30" rows="5" placeholder="Paste or JSON data"></textarea>
+                </div>
+            </div>
+        </div>
+
         <div className="grid">
           <a href="https://nextjs.org/docs" className="card">
             <h3>Buy me a coffee &rarr;</h3>
@@ -136,14 +150,73 @@ export default function Home() {
         }
 
         code {
-          background: #fafafa;
+          background: #eaeaea;
           border-radius: 5px;
           padding: 0.75rem;
           font-size: 1.1rem;
           font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
             DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
         }
+        .box {
+          diplay: flex;
+          align-items: center;
+          justify-content: center;
+          flex-wrap: wrap;
+          width: 800px;
+          padding: 1.5rem;
+          border: 1px solid #eaeaea;
+          border-radius: 10px;
+          // background:  #f2f2f2;
+        }
 
+        .actions {
+          margin: 1rem 0 0;
+          display: flex;
+          flex-wrap: wrap;
+        }
+        .half-relative {
+          flex: 0 0 50%;
+          max-width: 50%
+        }
+        .half-relative * {
+          position: relative;
+          transform: translateX(-50%);
+          left: 50%;
+        }
+        textarea, button {
+          padding: 1rem;
+          font-size: 1rem;
+        }
+        button .btn-img {
+          max-height: 3rem;
+          position: absolute;
+          top: 0.5rem;
+          transform: translateX(-50%);
+          left: 50%;
+        }
+        button {
+          background: #0070f3;
+          font-weight: bold;
+          color: white;
+          border-radius: 10px;
+          border: none;
+          height: 100%;
+          line-height: 2rem;
+        }
+        button:hover {
+          cursor: pointer;
+          opacity: 0.75;
+          transition: opacity .25s linear;
+        }
+        button:active, button:focus, button:target {
+          outline: none;
+        }
+        button:active {
+          background: #000;
+          background-size: 100%;
+          transition: background 0s;
+
+        }
         .grid {
           display: flex;
           align-items: center;
@@ -151,7 +224,7 @@ export default function Home() {
           flex-wrap: wrap;
 
           max-width: 800px;
-          margin-top: 3rem;
+          margin-top: 2rem;
         }
 
         .card {
@@ -173,12 +246,12 @@ export default function Home() {
           border-color: #0070f3;
         }
 
-        .card h3 {
+        .card h3, .box h3 {
           margin: 0 0 1rem 0;
           font-size: 1.5rem;
         }
 
-        .card p {
+        .card p, .box p {
           margin: 0;
           font-size: 1.25rem;
           line-height: 1.5;
@@ -189,7 +262,7 @@ export default function Home() {
         }
 
         @media (max-width: 600px) {
-          .grid {
+          .grid, .box {
             width: 100%;
             flex-direction: column;
           }
