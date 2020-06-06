@@ -3,6 +3,11 @@ import * as  jsonexport from 'jsonexport';
 
 let selectedFile = null
 let jsonContent = null
+let textAreaValue = null
+
+const handleChange = event => {
+  textAreaValue = event.target.value
+}
 
 const onFileChange = event => { 
   selectedFile = event.target.files[0];
@@ -23,11 +28,35 @@ const onFileChange = event => {
 }; 
 
 const onFileUpload = () => { 
-  jsonexport(jsonContent,function(err, csv){
-    if(err) return console.log(err);
-    console.log(csv);
-    writeAndDownload(csv, 'converted', 'text/csv')
-  });
+
+  if (textAreaValue) {
+    try {
+
+      textAreaValue = JSON.parse(textAreaValue)
+      jsonexport(textAreaValue,function(err, csv){
+        if(err) return console.log(err);
+        console.log(csv);
+        writeAndDownload(csv, 'converted', 'text/csv')
+      });
+    } catch (error) {
+      console.error(error)
+    }
+
+  } else if (jsonContent) {
+
+    const title = String(selectedFile.name).replace('.json', '')
+
+    jsonexport(jsonContent,function(err, csv){
+      if(err) return console.log(err);
+      console.log(csv);
+      writeAndDownload(csv, title, 'text/csv')
+    });
+
+  } else {
+
+    console.warn('No value')
+  }
+
 }; 
 
 const writeAndDownload = (data, fileName, fileType) => {
@@ -55,6 +84,7 @@ const forcedUpload = () => {
 }
 
 export default function Home() {
+  
   return (
     <div className="container">
       <Head>
@@ -79,7 +109,7 @@ export default function Home() {
 
         <div className="box">
             <h3><span>Upload</span> or <span>past</span> your JSON!</h3>
-            <p>Click the button below to upload the file, <label for="txtJSON"> or paste the text in the input.</label></p>
+            <p>Click the button below to upload the file, <label htmlFor="txtJSON"> or paste the text in the input.</label></p>
             
             <div className="actions">
                 <div className="half-relative">
@@ -87,7 +117,7 @@ export default function Home() {
                     <input id="uploadInput" type="file"  accept="application/JSON" onChange={onFileChange} /> 
                 </div>
                 <div className="half-relative">
-                  <textarea id="txtJSON" cols="30" rows="5" placeholder="Write or Paste your JSON data"></textarea>
+                  <textarea id="txtJSON" cols="30" rows="5" onChange={handleChange} placeholder="Write or Paste your JSON data"></textarea>
                 </div>
             </div>
             <div className="actions">
