@@ -1,16 +1,32 @@
 import Head from 'next/head'
 
-let selectedFile
+let selectedFile = null
+let jsonContent = null
 
 const onFileChange = event => { 
-  selectedFile = event.target.files[0];  
+  selectedFile = event.target.files[0];
+  
+  if (selectedFile) {
+    const reader = new FileReader()
+    reader.readAsText(selectedFile, 'UTF-8')
+    
+    reader.onload = (data) => {
+      jsonContent = JSON.parse(data.target.result)
+      console.log(jsonContent)
+    }
+
+
+    reader.onerror = (error) => {
+      console.log(error)
+    }
+  }
 }; 
 
 const onFileUpload = () => { 
      console.log(selectedFile)
 }; 
 
-const fakeUpload = () => {
+const forcedUpload = () => {
   const e = document.getElementById('uploadInput')
   e.click();
 }
@@ -42,10 +58,10 @@ export default function Home() {
             <div className="actions">
                 <div className="half-relative">
                 {/* <button onClick={ onFileUpload }><img src="/cloud.svg" alt="Vercel Logo" className="btn-img" /> <br></br>Upload JSON file</button> */}
-                <button onClick={ fakeUpload }><img src="/cloud.svg" alt="Vercel Logo" className="btn-img" /> <br></br>Upload JSON file</button>
+                <button onClick={ forcedUpload }><img src="/cloud.svg" alt="Vercel Logo" className="btn-img" /> <br></br>Upload JSON file</button>
 
                   {/* <label for="uploadInput"><img src="/cloud.svg" alt="Vercel Logo" className="btn-img" /> <br></br>Upload JSON file</label> */}
-                    <input id="uploadInput" type="file" onChange={onFileChange} /> 
+                    <input id="uploadInput" type="file"  accept="application/JSON" onChange={onFileChange} /> 
                 </div>
                 <div className="half-relative">
                     <textarea cols="30" rows="5" placeholder="Paste or JSON data"></textarea>
