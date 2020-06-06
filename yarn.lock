@@ -3238,6 +3238,11 @@ json5@^2.1.0, json5@^2.1.2:
   dependencies:
     minimist "^1.2.5"
 
+jsonexport@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/jsonexport/-/jsonexport-3.0.0.tgz#dc78a9cb9362914e64c76f4a6d37eaf6b7dd8cc3"
+  integrity sha512-Ahb6ejRHHlTARYWuAkKvlpDpHht64pRUCfixeoNOHrWSoUcYulAiiMvRBgZbfibQcHghilHyhVdmQ+MEp5Lmng==
+
 kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-3.2.2.tgz#31ea21a734bab9bbb0f32466d893aea51e4a3c64"

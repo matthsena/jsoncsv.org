@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import * as  jsonexport from 'jsonexport';
 
 let selectedFile = null
 let jsonContent = null
@@ -12,7 +13,6 @@ const onFileChange = event => {
     
     reader.onload = (data) => {
       jsonContent = JSON.parse(data.target.result)
-      console.log(jsonContent)
     }
 
 
@@ -23,7 +23,12 @@ const onFileChange = event => {
 }; 
 
 const onFileUpload = () => { 
-     console.log(selectedFile)
+  // jsonContent
+  jsonexport(jsonContent,function(err, csv){
+    if(err) return console.log(err);
+    console.log(csv);
+});
+  
 }; 
 
 const forcedUpload = () => {
@@ -69,6 +74,7 @@ export default function Home() {
             </div>
             <div className="actions">
                 <div className="full-relative">
+                  <button onClick={ onFileUpload }>Convert</button>
                 </div>
             </div>
         </div>
