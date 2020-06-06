@@ -60,13 +60,16 @@ export default function Home() {
       <Head>
         <title>JSON to CSV</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta charset="utf-8" />
+        <meta lang="en" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
       </Head>
 
       <main>
         <h1 className="title">
           
           Free  <span>JSON</span> to <span>CSV</span> converter
-          {/* <a href="https://nextjs.org">Next.js!</a> */}
         </h1>
 
         <h2 className="description">
@@ -76,61 +79,42 @@ export default function Home() {
 
         <div className="box">
             <h3><span>Upload</span> or <span>past</span> your JSON!</h3>
-            <p>Click the button below to upload the file, or paste the text in the input.</p>
+            <p>Click the button below to upload the file, <label for="txtJSON"> or paste the text in the input.</label></p>
             
             <div className="actions">
                 <div className="half-relative">
-                {/* <button onClick={ onFileUpload }><img src="/cloud.svg" alt="Vercel Logo" className="btn-img" /> <br></br>Upload JSON file</button> */}
                 <button onClick={ forcedUpload }><img src="/cloud.svg" alt="Vercel Logo" className="btn-img" /> <br></br>Upload JSON file</button>
-
-                  {/* <label for="uploadInput"><img src="/cloud.svg" alt="Vercel Logo" className="btn-img" /> <br></br>Upload JSON file</label> */}
                     <input id="uploadInput" type="file"  accept="application/JSON" onChange={onFileChange} /> 
                 </div>
                 <div className="half-relative">
-                    <textarea cols="30" rows="5" placeholder="Paste or JSON data"></textarea>
+                  <textarea id="txtJSON" cols="30" rows="5" placeholder="Write or Paste your JSON data"></textarea>
                 </div>
             </div>
             <div className="actions">
                 <div className="full-relative">
-                  <button onClick={ onFileUpload }>Convert</button>
+                  <button className="convert-btn" onClick={ onFileUpload }>Convert to CSV</button>
                 </div>
             </div>
         </div>
 
         <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
+          <a href="https://nextjs.org/docs" target="_blank"
+          rel="noopener noreferrer" className="card">
             <h3>Buy me a coffee &rarr;</h3>
             <p>Donating any amount you help to keep the site online <span>without ads.</span></p>
           </a>
 
-          <a href="https://nextjs.org/learn" className="card">
+          <a href="https://github.com/matthsena/jsoncsv.org" target="_blank"
+          rel="noopener noreferrer" className="card">
             <h3>See on GitHub &rarr;</h3>
             <p>Collaborate with the project or just take a look!</p>
           </a>
-
-          {/* <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="card"
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a> */}
         </div>
       </main>
 
       <footer>
         <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+          href="https://github.com/matthsena/jsoncsv.org"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -220,6 +204,11 @@ export default function Home() {
           font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
             DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
         }
+        code span {
+          color: #000;
+          text-decoration: underline
+        }
+
         .box {
           diplay: flex;
           align-items: center;
@@ -253,18 +242,24 @@ export default function Home() {
         input {
           display: none;
         }
-        textarea, button, label {
+        textarea, button {
           padding: 1rem;
           font-size: 1rem;
         }
-        button .btn-img, label .btn-img {
+
+        .convert-btn {
+          padding: 0.5rem 1rem;
+          background: #ffab00;
+          color: #000
+        }
+        button .btn-img {
           max-height: 3rem;
           position: absolute;
           top: 0.5rem;
           transform: translateX(-50%);
           left: 50%;
         }
-        button, label {
+        button {
           background: #0070f3;
           font-weight: bold;
           color: white;
@@ -273,7 +268,7 @@ export default function Home() {
           height: 100%;
           line-height: 2rem;
         }
-        button:hover, label:hover {
+        button:hover {
           cursor: pointer;
           opacity: 0.75;
           transition: opacity .25s linear;
@@ -281,7 +276,7 @@ export default function Home() {
         button:active, button:focus, button:target {
           outline: none;
         }
-        button:active, label:active {
+        button:active {
           background: #000;
           background-size: 100%;
           transition: background 0s;
