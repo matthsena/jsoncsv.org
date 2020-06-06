@@ -23,13 +23,31 @@ const onFileChange = event => {
 }; 
 
 const onFileUpload = () => { 
-  // jsonContent
   jsonexport(jsonContent,function(err, csv){
     if(err) return console.log(err);
     console.log(csv);
-});
-  
+    writeAndDownload(csv, 'converted', 'text/csv')
+  });
 }; 
+
+const writeAndDownload = (data, fileName, fileType) => {
+
+  const file = new Blob([data], {type: fileType})
+
+  let link = document.createElement("a")
+  const url = URL.createObjectURL(file)
+
+  link.href = url
+  link.download = fileName
+  document.body.appendChild(link)
+  
+  link.click();
+
+  setTimeout(() => {
+    document.body.removeChild(link)
+    window.URL.revokeObjectURL(url)
+  }, 0)
+}
 
 const forcedUpload = () => {
   const e = document.getElementById('uploadInput')
