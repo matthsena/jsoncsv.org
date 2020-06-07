@@ -96,8 +96,8 @@ class Home extends React.Component {
         <Head>
           <title>Free and Unlimited JSON to CSV converter</title>
           <link rel="icon" href="/favicon.ico" />
-          <meta charset="utf-8" />
-          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+          <meta charSet="utf-8" />
+          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta name="viewport" content="width=device-width,initial-scale=1" />
           <meta name="description" content ="The fastest, easiest and most reliable tool to convert JSON files to CSV or Excel, totally free, unlimited and open source" />
           <meta property="og:title" content="Free and Unlimited JSON to CSV converter"/>
