@@ -94,12 +94,17 @@ class Home extends React.Component {
     return (
       <div className="container">
         <Head>
-          <title>JSON to CSV</title>
+          <title>Free and Unlimited JSON to CSV converter</title>
           <link rel="icon" href="/favicon.ico" />
           <meta charset="utf-8" />
-          <meta lang="en" />
           <meta http-equiv="X-UA-Compatible" content="IE=edge" />
           <meta name="viewport" content="width=device-width,initial-scale=1" />
+          <meta name="description" content ="The fastest, easiest and most reliable tool to convert JSON files to CSV or Excel, totally free, unlimited and open source" />
+          <meta property="og:title" content="Free and Unlimited JSON to CSV converter"/>
+          <meta property="og:type" content="website"/>
+          <meta property="og:url" content="http://jsoncsv.org/"/>
+          {/* <meta property="og:image" content="img/og-banner.png"> */}
+          <meta property="og:description" content="The fastest, easiest and most reliable tool to convert JSON files to CSV or Excel, totally free, unlimited and open source"/>
         </Head>
 
         <main>
