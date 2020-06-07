@@ -1,14 +1,6 @@
 import Head from 'next/head'
 import * as  jsonexport from 'jsonexport'
 
-let selectedFile = null
-let jsonContent = null
-let textAreaValue = null
-
-const handleChange = event => {
-  textAreaValue = event.target.value
-}
-
 const writeAndDownload = (data, fileName, fileType) => {
 
   const file = new Blob([data], {type: fileType})
@@ -32,7 +24,18 @@ class Home extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {fileName: null}
+    this.state = {
+      fileName: null, 
+      textAreaValue: '', 
+      selectedFile: null, 
+      jsonContent: null
+    }
+  }
+
+  updateTextAreaValue = event => {
+    this.setState({
+      textAreaValue: event.target.value
+    })
   }
 
   forcedUpload = () => {
@@ -41,12 +44,12 @@ class Home extends React.Component {
   }
 
   onFileUpload = () => { 
-    if (textAreaValue) {
+    if (this.state.textAreaValue) {
       try {
         
-        textAreaValue = JSON.parse(textAreaValue)
+        const txt = JSON.parse(this.state.textAreaValue)
         
-        jsonexport(textAreaValue,function(err, csv){
+        jsonexport(txt,function(err, csv){
           if(err) return console.log(err);
           console.log(csv);
           writeAndDownload(csv, 'converted', 'text/csv')
@@ -54,11 +57,11 @@ class Home extends React.Component {
       } catch (error) {
         console.error(error)
       }
-    } else if (jsonContent) {
+    } else if (this.state.jsonContent) {
 
-      const title = String(selectedFile.name).replace('.json', '')
+      const title = String(this.state.selectedFile.name).replace('.json', '')
       
-      jsonexport(jsonContent,function(err, csv){
+      jsonexport(this.state.jsonContent,function(err, csv){
         if(err) return console.log(err);
         console.log(csv);
         writeAndDownload(csv, title, 'text/csv')
@@ -69,16 +72,17 @@ class Home extends React.Component {
   }
 
   onFileChange = event => { 
-    selectedFile = event.target.files[0];
-    if (selectedFile) {
+    const file = event.target.files[0];
+    if (file) {
 
-      this.setState({fileName: selectedFile.name})
+      this.setState({fileName: file.name, selectedFile: file})
   
       const reader = new FileReader()
-      reader.readAsText(selectedFile, 'UTF-8')
+      reader.readAsText(file, 'UTF-8')
       
       reader.onload = (data) => {
-        jsonContent = JSON.parse(data.target.result)
+
+        this.setState({jsonContent: JSON.parse(data.target.result)})
       }
       reader.onerror = (error) => {
         console.log(error)
@@ -100,7 +104,6 @@ class Home extends React.Component {
 
         <main>
           <h1 className="title">
-            
             Free  <span>JSON</span> to <span>CSV</span> converter
           </h1>
 
@@ -120,7 +123,7 @@ class Home extends React.Component {
                     <input id="uploadInput" type="file"  accept="application/JSON" onChange={this.onFileChange} /> 
                   </div>
                   <div className="half-relative">
-                    <textarea id="txtJSON" cols="30" rows="5" onChange={handleChange} placeholder="Write or Paste your JSON data"></textarea>
+                    <textarea value={this.state.textAreaValue} id="txtJSON" cols="30" rows="5" onChange={this.updateTextAreaValue} placeholder="Write or Paste your JSON data"></textarea>
                   </div>
               </div>
               <div className="actions">
