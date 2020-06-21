@@ -122,20 +122,21 @@ class Home extends React.Component {
               <p>Click the button below to upload the file, <label htmlFor="txtJSON"> or paste the text in the input.</label></p>
               
               <div className="actions">
-                  <div className="half-relative">
+                  <div className="justUpload">
                     <button onClick={ this.forcedUpload }><img src="/cloud.svg" alt="Vercel Logo" className="btn-img" /> <br></br>Upload JSON file</button>
-                    <p>{this.state.fileName}</p>
+                    {/* <p>{this.state.fileName}</p> */}
                     <input id="uploadInput" type="file"  accept="application/JSON" onChange={this.onFileChange} /> 
                   </div>
-                  <div className="half-relative">
+                  {/* <div className="half-relative">
                     <textarea value={this.state.textAreaValue} id="txtJSON" cols="30" rows="5" onChange={this.updateTextAreaValue} placeholder="Write or Paste your JSON data"></textarea>
-                  </div>
+                  </div> */}
               </div>
+             {this.state.fileName && 
               <div className="actions">
                   <div className="full-relative">
-                    <button className="convert-btn" onClick={ this.onFileUpload }>Convert to CSV</button>
+                    <button className="convert-btn" onClick={ this.onFileUpload }>Convert {this.state.fileName}</button>
                   </div>
-              </div>
+              </div>}
           </div>
 
           <div className="grid">
@@ -206,7 +207,13 @@ class Home extends React.Component {
             color: inherit;
             text-decoration: none;
           }
-        span {
+          .justUpload {
+            position: relative;
+            left: 50%;
+            rigth: -50%;
+            transform: translateX(-50%);
+          }
+          span {
             color: #0070f3;
             font-weight: bold;
           }
