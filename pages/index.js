@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import * as  jsonexport from 'jsonexport'
 
-const writeAndDownload = (data, fileName, fileType) => {
+const writeAndDownload = async(data, fileName, fileType) => {
 
   const file = new Blob([data], {type: fileType})
 
@@ -26,16 +26,10 @@ class Home extends React.Component {
     super(props)
     this.state = {
       fileName: null, 
-      textAreaValue: '', 
       selectedFile: null, 
-      jsonContent: null
+      jsonContent: null,
+      loading: false
     }
-  }
-
-  updateTextAreaValue = event => {
-    this.setState({
-      textAreaValue: event.target.value
-    })
   }
 
   forcedUpload = () => {
@@ -44,28 +38,23 @@ class Home extends React.Component {
   }
 
   onFileUpload = () => { 
-    if (this.state.textAreaValue) {
-      try {
-        
-        const txt = JSON.parse(this.state.textAreaValue)
-        
-        jsonexport(txt,function(err, csv){
-          if(err) return console.log(err);
-          console.log(csv);
-          writeAndDownload(csv, 'converted', 'text/csv')
-        });
-      } catch (error) {
-        console.error(error)
-      }
-    } else if (this.state.jsonContent) {
+    if (this.state.jsonContent) {
+
+      
+      this.setState({loading: true})
+
 
       const title = String(this.state.selectedFile.name).replace('.json', '')
       
-      jsonexport(this.state.jsonContent,function(err, csv){
+      jsonexport(this.state.jsonContent, function(err, csv){
         if(err) return console.log(err);
-        console.log(csv);
         writeAndDownload(csv, title, 'text/csv')
       });
+
+      setTimeout(() => {      
+          this.setState({loading: false})
+      }, 1000)
+
     } else {
       console.warn('No value')
     }
@@ -108,6 +97,9 @@ class Home extends React.Component {
         </Head>
 
         <main>
+          {this.state.loading && 
+          <div className="loading">
+          </div>}
           <h1 className="title">
             Free  <span>JSON</span> to <span>CSV</span> converter
           </h1>
@@ -124,12 +116,8 @@ class Home extends React.Component {
               <div className="actions">
                   <div className="justUpload">
                     <button onClick={ this.forcedUpload }><img src="/cloud.svg" alt="Vercel Logo" className="btn-img" /> <br></br>Upload JSON file</button>
-                    {/* <p>{this.state.fileName}</p> */}
                     <input id="uploadInput" type="file"  accept="application/JSON" onChange={this.onFileChange} /> 
                   </div>
-                  {/* <div className="half-relative">
-                    <textarea value={this.state.textAreaValue} id="txtJSON" cols="30" rows="5" onChange={this.updateTextAreaValue} placeholder="Write or Paste your JSON data"></textarea>
-                  </div> */}
               </div>
              {this.state.fileName && 
               <div className="actions">
@@ -166,6 +154,37 @@ class Home extends React.Component {
         </footer>
 
         <style jsx>{`
+          .loading {
+            position: fixed;
+            height: 0.3rem;
+            width: 100vw;
+            left: 0;
+            top: 0;
+            background: rgba(0, 112, 243, 0.35);
+          }
+
+          .loading::before {
+            position: absolute;
+            content: "";
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 20vw;
+            background: #0070f3;
+            z-index: 2;
+            animation: loading 1s infinite linear;
+            transition: all 250ms;
+          }
+
+          @keyframes loading {
+              0% { left: 0; }
+              20% { left: 20vw; }
+              40% { left: 40vw; }
+              60% { left: 60vw; }
+              80% { left: 80vw; }
+              100% { left: 100vw; }
+          }
+
           .container {
             min-height: 100vh;
             padding: 0 0.5rem;
