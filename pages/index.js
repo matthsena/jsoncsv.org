@@ -88,7 +88,7 @@ class Home extends React.Component {
           <meta charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta name="viewport" content="width=device-width,initial-scale=1" />
-          <meta name="description" content ="The fastest, easiest and most reliable tool to convert JSON files to CSV or Excel, totally free, unlimited and open source" />
+          <meta name="description" content ="The fastest, easiest and most reliable tool to convert JSON to CSV, totally free, unlimited and open source" />
           <meta property="og:title" content="Free and Unlimited JSON to CSV converter"/>
           <meta property="og:type" content="website"/>
           <meta property="og:url" content="http://jsoncsv.org/"/>
@@ -140,6 +140,23 @@ class Home extends React.Component {
               <p>Collaborate with the project or just take a look!</p>
             </a>
           </div>
+          
+          <div className="grid">
+                <h3>Why convert <strong>JSON to CSV</strong>?</h3>
+                <p>JSON (JavaScript Object Notation) is awesome file format to save and use data, 
+                    uses human-readable text to store data objects consisting of attribute–value pairs and array data types, 
+                    some NoSQL databases are JSON based and the most modern APIs return JSON data.
+                </p>
+                <p>CSV (Comma-separated values) is an awesome file format too, but it's more readable to non programmers or to build 
+                     simple and fast analyzes, because is very similar to a spreadsheet, you can open this file on Excel, Libreoffice Calc, Google Sheets and etc.
+                </p>
+                <p>You can take advantage of both formats! Retrive data from a modern source and just <strong>convert JSON to CSV</strong>! Convert <span>unlimited</span> JSON files with 
+                <span>unlimited</span> file size.
+                </p>
+            </div>
+
+
+
         </main>
 
         <footer>
@@ -354,8 +371,7 @@ class Home extends React.Component {
             align-items: center;
             justify-content: center;
             flex-wrap: wrap;
-
-            max-width: 800px;
+            width: 800px;
             margin-top: 2rem;
           }
 
