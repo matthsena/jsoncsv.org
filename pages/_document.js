@@ -11,7 +11,7 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head>
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-168764293-1"></script>
-
+        
         <script
             dangerouslySetInnerHTML={{
               __html: `
@@ -23,6 +23,7 @@ class MyDocument extends Document {
               `
             }}
           />
+          <script data-ad-client="ca-pub-3117693641943804" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         </Head>
         <body>
           <Main />

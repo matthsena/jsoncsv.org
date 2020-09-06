@@ -128,10 +128,10 @@ class Home extends React.Component {
           </div>
 
           <div className="grid">
-            <a href="https://nextjs.org/docs" target="_blank"
+            <a href="https://buymeacoff.ee/matthsena" target="_blank"
             rel="noopener noreferrer" className="card">
               <h3>Buy me a coffee &rarr;</h3>
-              <p>Donating any amount you help to keep the site online <span>without ads.</span></p>
+              <p>Donating any amount you help to keep the <span>site online</span>.</p>
             </a>
 
             <a href="https://github.com/matthsena/jsoncsv.org" target="_blank"
